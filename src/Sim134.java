@@ -15,8 +15,7 @@ public class Sim134 {
         // Special case: number of iterations was not an integer
         try {
             Integer.parseInt(args[0]);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("\n\tYour first argument must be an Integer >= 0.\n\tIt will specify the number of iterations.");
         }
 
