@@ -37,11 +37,11 @@ public class GUI {
         cells[i][j] = value;
 
         // Initialize Color object
-        Color col = new Color(0,0,0);
+        Color col = new Color(255,255,255);
         Color border = new Color(191,191,191);
         if (value)
         {
-            col = new Color(255,255,255);
+            col = new Color(0,0,0);
             //border = new Color(0,0,0);
         }
 
