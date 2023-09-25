@@ -18,7 +18,7 @@ public class GUI {
         this.cells = cells;
         x = cells.length;
         y = cells[0].length;
-        magnification = 12;
+        magnification = 15;
         pic = new Picture(x * magnification, y * magnification);
 
 
@@ -38,7 +38,12 @@ public class GUI {
 
         // Initialize Color object
         Color col = new Color(0,0,0);
-        if (value) { col = new Color(255,255,255); }
+        Color border = new Color(191,191,191);
+        if (value)
+        {
+            col = new Color(255,255,255);
+            //border = new Color(0,0,0);
+        }
 
         // Color in selected cell
         for (int offsetX = 0; offsetX < magnification; offsetX++)
@@ -46,7 +51,13 @@ public class GUI {
             for (int offsetY = 0; offsetY < magnification; offsetY++)
             {
                 // set() colours an individual pixel
-                pic.set((i*magnification)+offsetX, (j*magnification)+offsetY, col);
+                if (offsetX == magnification - 1 || offsetY == magnification - 1) {
+                    pic.set((i*magnification)+offsetX, (j*magnification)+offsetY, border);
+                }
+                else
+                {
+                    pic.set((i*magnification)+offsetX, (j*magnification)+offsetY, col);
+                }
             }
         }
     }
