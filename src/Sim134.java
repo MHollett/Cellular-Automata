@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.Random;
 
 public class Sim134 {
 
@@ -34,7 +34,7 @@ public class Sim134 {
         }
 
         // Special case: pattern type specified is not one of the expected designs
-        String patternType = args[1].toUpperCase();
+        String patternType = args[1];
         if (!(patternType.equals("R") || patternType.equals("J") || patternType.equals("D"))) {
             System.out.println("\n\tYour second argument must be one of the following:\n\t\tR - Random\n\t\tJ - Jam (oscillator pattern)\n\t\tD - Dart (glider patter)");
         }
@@ -57,7 +57,7 @@ public class Sim134 {
 
 
         for (int i = 0; i < iterations; i++) {
-            Thread.sleep(450);
+            Thread.sleep(350);
 
             copyCells();
             updateCells();
@@ -89,7 +89,56 @@ public class Sim134 {
             cells[startingX + 5][startingY + 2] = true;
         }
 
+        // Case: Random
+        else if (patternType.equals("R")) {
+            Random rand = new Random();
 
+            for (int i = 0; i < cells.length; i++) {
+                for (int j = 0; j < cells[0].length; j++) {
+                    cells[i][j] = rand.nextBoolean();
+                }
+            }
+        }
+
+        else if (patternType.equals("D")) {
+            int startingX = (int) (cells.length / 2) - 8;
+            int startingY = 12 * (int) (cells[0].length / 16);
+
+            cells[startingX][startingY + 8] = true;
+            cells[startingX + 1][startingY + 7] = true;
+            cells[startingX + 1][startingY + 9] = true;
+            cells[startingX + 2][startingY + 6] = true;
+            cells[startingX + 2][startingY + 7] = true;
+            cells[startingX + 3][startingY + 9] = true;
+            cells[startingX + 4][startingY + 5] = true;
+            cells[startingX + 4][startingY + 9] = true;
+            cells[startingX + 5][startingY + 2] = true;
+            cells[startingX + 5][startingY + 5] = true;
+            cells[startingX + 6][startingY + 1] = true;
+            cells[startingX + 6][startingY + 3] = true;
+            cells[startingX + 6][startingY + 6] = true;
+            cells[startingX + 6][startingY + 7] = true;
+            cells[startingX + 6][startingY + 8] = true;
+            cells[startingX + 6][startingY + 9] = true;
+            cells[startingX + 7][startingY] = true;
+            cells[startingX + 7][startingY + 3] = true;
+            cells[startingX + 14][startingY + 8] = true;
+            cells[startingX + 13][startingY + 7] = true;
+            cells[startingX + 13][startingY + 9] = true;
+            cells[startingX + 12][startingY + 6] = true;
+            cells[startingX + 12][startingY + 7] = true;
+            cells[startingX + 11][startingY + 9] = true;
+            cells[startingX + 10][startingY + 5] = true;
+            cells[startingX + 10][startingY + 9] = true;
+            cells[startingX + 9][startingY + 2] = true;
+            cells[startingX + 9][startingY + 5] = true;
+            cells[startingX + 8][startingY + 1] = true;
+            cells[startingX + 8][startingY + 3] = true;
+            cells[startingX + 8][startingY + 6] = true;
+            cells[startingX + 8][startingY + 7] = true;
+            cells[startingX + 8][startingY + 8] = true;
+            cells[startingX + 8][startingY + 9] = true;
+        }
     }
 
     private void updateCells() {
