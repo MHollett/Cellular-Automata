@@ -7,7 +7,9 @@ public class GUI {
     private boolean[][] cells;      // stores the value in each cell
     private Picture pic;            // picture to be drawn on screen
 
-    public GUI(boolean[][] cells) throws Exception {
+
+    // Initializes a GUI to match the cells array taken as an argument
+    public GUI(boolean[][] cells, int m) throws Exception {
         // Special case: cells array is empty
         if (cells.length == 0)
         {
@@ -18,7 +20,7 @@ public class GUI {
         this.cells = cells;
         x = cells.length;
         y = cells[0].length;
-        magnification = 15;
+        magnification = m;
         pic = new Picture(x * magnification, y * magnification);
 
 
@@ -32,6 +34,8 @@ public class GUI {
         }
     }
 
+
+    // Colors in the given cell according to the value argument. Either white (false) or black (true).
     public void updateCell(int i, int j, boolean value)
     {
         cells[i][j] = value;
@@ -62,7 +66,7 @@ public class GUI {
         }
     }
 
-    // display (or update) the picture on screen
+    // update the picture on screen
     public void show()
     {
         pic.show();     // without calling this the pic will not show

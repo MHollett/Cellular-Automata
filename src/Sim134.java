@@ -7,9 +7,9 @@ public class Sim134 {
     int iterations;         // Count of iterations remaining
     GUI gui;                // The GUI corresponding to this simulation
 
-    public static void main(String[] args) throws Exception {
 
-        // HANDLE USER CONTROL
+    // Handles user control and creates the simulation object based on inputs
+    public static void main(String[] args) throws Exception {
 
         // Special case: not enough arguments were entered
         if (args.length < 2) {
@@ -43,14 +43,17 @@ public class Sim134 {
 
     }
 
+
+    // Initializes and runs the simulation
     public Sim134(int iterations, String patternType) throws Exception {
 
         this.iterations = iterations;
         cells = new boolean[80][80];
         pastCells = new boolean[80][80];
 
+        int magnification = 12;
         initializePattern(patternType);
-        gui = new GUI(cells);
+        gui = new GUI(cells, magnification);
         gui.show();
 
 
@@ -67,6 +70,7 @@ public class Sim134 {
     }
 
 
+    // Inputs the starting pattern
     private void initializePattern(String patternType) {
 
         // Case: Jam Oscillator
@@ -141,6 +145,8 @@ public class Sim134 {
         }
     }
 
+
+    // updates the cell according to the rules of The Game of Life and updates the GUI to reflect the changes
     private void updateCells() {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[0].length; j++) {
@@ -164,6 +170,7 @@ public class Sim134 {
         gui.show();
     }
 
+    // Gets the count of alive neighbors to the cell inputted as x and y coordinates
     private int sumNeighbors(int x, int y) {
         int count = 0;
         int tempX;
@@ -188,7 +195,7 @@ public class Sim134 {
         return count;
     }
 
-    // Copies the cells array to the pastCells array
+    // Copies the cells array to the pastCells array (Stores the cell history)
     private void copyCells() {
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[0].length; j++) {
