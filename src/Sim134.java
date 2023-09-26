@@ -25,18 +25,21 @@ public class Sim134 {
             Integer.parseInt(args[0]);
         } catch (Exception e) {
             System.out.println("\n\tYour first argument must be an Integer >= 0.\n\tIt will specify the number of iterations.");
+            return;
         }
 
         // Special case: iterations specified is below 0
         int iterations = Integer.parseInt(args[0]);
         if (iterations < 0) {
             System.out.println("\n\tYour first argument must be greater than 0.\n\tIt will specify the number of iterations (Integer > 0).");
+            return;
         }
 
         // Special case: pattern type specified is not one of the expected designs
         String patternType = args[1];
         if (!(patternType.equals("R") || patternType.equals("J") || patternType.equals("D"))) {
             System.out.println("\n\tYour second argument must be one of the following:\n\t\tR - Random\n\t\tJ - Jam (oscillator pattern)\n\t\tD - Dart (glider patter)");
+            return;
         }
 
         Sim134 sim = new Sim134(iterations, patternType);
@@ -51,16 +54,17 @@ public class Sim134 {
         cells = new boolean[80][80];
         pastCells = new boolean[80][80];
 
-        int magnification = 12;
+        int MAGNIFICATION = 12;
+        int DELAY = 100; // In milliseconds
         initializePattern(patternType);
-        gui = new GUI(cells, magnification);
+        gui = new GUI(cells, MAGNIFICATION);
         gui.show();
 
 
 
 
         for (int i = 0; i < iterations; i++) {
-            Thread.sleep(350);
+            Thread.sleep(DELAY);
 
             copyCells();
             updateCells();
